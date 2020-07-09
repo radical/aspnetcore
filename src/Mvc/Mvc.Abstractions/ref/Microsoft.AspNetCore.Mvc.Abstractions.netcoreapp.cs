@@ -641,6 +641,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public abstract string BinderModelName { get; }
         public abstract System.Type BinderType { get; }
         public abstract Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource BindingSource { get; }
+        public virtual Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata? BoundConstructor { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
+        public abstract System.Func<object[], object> ConstructorInvoker { get; }
         public virtual Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata ContainerMetadata { get { throw null; } }
         public System.Type? ContainerType { get { throw null; } }
         public abstract bool ConvertEmptyStringToNull { get; }
@@ -657,7 +659,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public virtual bool? HasValidators { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
         public abstract bool HideSurroundingHtml { get; }
         public abstract bool HtmlEncode { get; }
-        protected Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity Identity { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
+        protected internal Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity Identity { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
         public abstract bool IsBindingAllowed { get; }
         public abstract bool IsBindingRequired { get; }
         public bool IsCollectionType { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
@@ -676,6 +678,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public abstract string NullDisplayText { get; }
         public abstract int Order { get; }
         public string? ParameterName { get { throw null; } }
+        public abstract System.Collections.Generic.IReadOnlyList<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata> Parameters { get; }
         public abstract string Placeholder { get; }
         public abstract Microsoft.AspNetCore.Mvc.ModelBinding.ModelPropertyCollection Properties { get; }
         public abstract Microsoft.AspNetCore.Mvc.ModelBinding.IPropertyFilterProvider PropertyFilterProvider { get; }
@@ -700,6 +703,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
     public abstract partial class ModelMetadataProvider : Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
     {
         protected ModelMetadataProvider() { }
+        public virtual Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata GetMetadataForConstructor(System.Reflection.ConstructorInfo constructor, System.Type modelType) { throw null; }
         public abstract Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata GetMetadataForParameter(System.Reflection.ParameterInfo parameter);
         public virtual Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata GetMetadataForParameter(System.Reflection.ParameterInfo parameter, System.Type modelType) { throw null; }
         public abstract System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata> GetMetadataForProperties(System.Type modelType);
@@ -897,6 +901,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+        public System.Reflection.ConstructorInfo? ConstructorInfo { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
         public System.Type? ContainerType { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
         public Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind MetadataKind { get { throw null; } }
         public System.Type ModelType { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
@@ -905,6 +910,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public System.Reflection.PropertyInfo? PropertyInfo { get { throw null; } }
         public bool Equals(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity other) { throw null; }
         public override bool Equals(object? obj) { throw null; }
+        public static Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity ForConstructor(System.Reflection.ConstructorInfo constructor, System.Type modelType) { throw null; }
         public static Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity ForParameter(System.Reflection.ParameterInfo parameter) { throw null; }
         public static Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity ForParameter(System.Reflection.ParameterInfo parameter, System.Type modelType) { throw null; }
         public static Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity ForProperty(System.Reflection.PropertyInfo propertyInfo, System.Type modelType, System.Type containerType) { throw null; }
@@ -918,6 +924,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         Type = 0,
         Property = 1,
         Parameter = 2,
+        Constructor = 3,
     }
 }
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation

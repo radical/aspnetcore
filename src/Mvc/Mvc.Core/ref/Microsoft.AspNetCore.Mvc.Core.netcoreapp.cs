@@ -2850,6 +2850,21 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         protected virtual object CreateEmptyCollection(System.Type targetType) { throw null; }
         protected object CreateInstance(System.Type targetType) { throw null; }
     }
+    public partial class ComplexObjectModelBinder : Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder
+    {
+        internal ComplexObjectModelBinder() { }
+        public System.Threading.Tasks.Task BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext bindingContext) { throw null; }
+        public static partial class Log
+        {
+            public static void NoPublicSettableItems(Microsoft.Extensions.Logging.ILogger logger, Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext bindingContext) { }
+        }
+    }
+    public partial class ComplexObjectModelBinderProvider : Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinderProvider
+    {
+        public ComplexObjectModelBinderProvider() { }
+        public Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder GetBinder(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext context) { throw null; }
+    }
+    [System.ObsoleteAttribute("This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinder instead.")]
     public partial class ComplexTypeModelBinder : Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder
     {
         public ComplexTypeModelBinder(System.Collections.Generic.IDictionary<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder> propertyBinders, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory) { }
@@ -2860,6 +2875,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         protected virtual object CreateModel(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext bindingContext) { throw null; }
         protected virtual void SetProperty(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext bindingContext, string modelName, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata propertyMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult result) { }
     }
+    [System.ObsoleteAttribute("This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinderProvider instead.")]
     public partial class ComplexTypeModelBinderProvider : Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinderProvider
     {
         public ComplexTypeModelBinderProvider() { }
@@ -2986,6 +3002,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public string BinderModelName { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public System.Type BinderType { get { throw null; } set { } }
         public Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource BindingSource { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
+        public System.Reflection.ConstructorInfo BoundConstructor { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public bool IsBindingAllowed { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public bool IsBindingRequired { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public bool? IsReadOnly { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
@@ -3013,6 +3030,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
     {
         public DefaultMetadataDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity key, Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes attributes) { }
         public Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.BindingMetadata BindingMetadata { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
+        public System.Func<object[], object> BoundConstructorInvoker { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
+        public Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata[] ConstructorParameters { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata ContainerMetadata { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadata DisplayMetadata { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] set { } }
         public Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity Key { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
@@ -3059,6 +3078,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override System.Type BinderType { get { throw null; } }
         public Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.BindingMetadata BindingMetadata { get { throw null; } }
         public override Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource BindingSource { get { throw null; } }
+        public override Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata BoundConstructor { get { throw null; } }
+        public override System.Func<object[], object> ConstructorInvoker { get { throw null; } }
         public override Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata ContainerMetadata { get { throw null; } }
         public override bool ConvertEmptyStringToNull { get { throw null; } }
         public override string DataTypeName { get { throw null; } }
@@ -3083,6 +3104,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider ModelBindingMessageProvider { get { throw null; } }
         public override string NullDisplayText { get { throw null; } }
         public override int Order { get { throw null; } }
+        public override System.Collections.Generic.IReadOnlyList<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata> Parameters { get { throw null; } }
         public override string Placeholder { get { throw null; } }
         public override Microsoft.AspNetCore.Mvc.ModelBinding.ModelPropertyCollection Properties { get { throw null; } }
         public override Microsoft.AspNetCore.Mvc.ModelBinding.IPropertyFilterProvider PropertyFilterProvider { get { throw null; } }
@@ -3109,6 +3131,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         protected virtual Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails CreateParameterDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity key) { throw null; }
         protected virtual Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails[] CreatePropertyDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity key) { throw null; }
         protected virtual Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails CreateTypeDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity key) { throw null; }
+        public override Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata GetMetadataForConstructor(System.Reflection.ConstructorInfo constructorInfo, System.Type modelType) { throw null; }
         public override Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata GetMetadataForParameter(System.Reflection.ParameterInfo parameter) { throw null; }
         public override Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata GetMetadataForParameter(System.Reflection.ParameterInfo parameter, System.Type modelType) { throw null; }
         public override System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata> GetMetadataForProperties(System.Type modelType) { throw null; }
@@ -3232,7 +3255,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public static void RemoveType(this System.Collections.Generic.IList<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider> list, System.Type type) { }
         public static void RemoveType<TModelValidatorProvider>(this System.Collections.Generic.IList<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider> list) where TModelValidatorProvider : Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider { }
     }
-    [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.Property, AllowMultiple=false, Inherited=true)]
+    [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.Parameter | System.AttributeTargets.Property, AllowMultiple=false, Inherited=true)]
     public sealed partial class ValidateNeverAttribute : System.Attribute, Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IPropertyValidationFilter
     {
         public ValidateNeverAttribute() { }
