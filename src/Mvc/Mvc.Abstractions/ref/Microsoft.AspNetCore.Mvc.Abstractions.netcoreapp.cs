@@ -642,7 +642,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public abstract System.Type BinderType { get; }
         public abstract Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource BindingSource { get; }
         public virtual Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata? BoundConstructor { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } }
-        public abstract System.Func<object[], object> ConstructorInvoker { get; }
+        public virtual System.Func<object[], object>? ConstructorInvoker { get { throw null; } }
         public virtual Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata ContainerMetadata { get { throw null; } }
         public System.Type? ContainerType { get { throw null; } }
         public abstract bool ConvertEmptyStringToNull { get; }

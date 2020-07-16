@@ -2854,10 +2854,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
     {
         internal ComplexObjectModelBinder() { }
         public System.Threading.Tasks.Task BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext bindingContext) { throw null; }
-        public static partial class Log
-        {
-            public static void NoPublicSettableItems(Microsoft.Extensions.Logging.ILogger logger, Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext bindingContext) { }
-        }
     }
     public partial class ComplexObjectModelBinderProvider : Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinderProvider
     {
